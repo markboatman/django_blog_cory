@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,6 @@ urlpatterns = [
     # path('blog/', include('blog.urls')),
     # this will match :8000/'' and go to blog/'' 
     # typing :8000/blog/ will not work anymore
-    path('', include('blog.urls'))
+    path('', include('blog.urls')),
+    path('register/', user_views.register,  name='register'),
 ]

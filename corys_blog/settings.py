@@ -31,8 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # this is the blog app
+    # this is our blog app
     'blog.apps.BlogConfig',
+    # this is our user app, 
+    # UserConfig class is in users/apps.py
+    'users.apps.UsersConfig',
+    # to access our installed django-crispy-forms
+    'crispy_forms', # define this in this file, CRISPY_TEMPLATE_PACK = 'bootstrap4'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,3 +128,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for our installed django-crispy-forms library
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
