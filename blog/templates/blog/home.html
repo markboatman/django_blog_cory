@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {# if, for, while #}
+  {% for post in posts %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ post.author }}</a>
+        {% comment %} 
+        https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#date
+        date: is a django filter, we are piping through the filter 
+        {% endcomment %}
+        <small class="text-muted">{{ post.date_posted|date:"F d Y" }}</small>
+      </div>
+      <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+  {% endfor %}
+<!-- always have to tag the end of logic structures -->
+{% endblock content %}
