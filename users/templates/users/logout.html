@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% comment %} 
+  can access templates in the blog app like this
+  csrf_token - a hidden tag, prevents cross site request forgerys, hence csrf_token
+  {% endcomment %}
+
+{% block content %}
+<div class="content-section">
+  <h2>You have been logged out</h2>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+     <a href="{% url 'login' %}">Log In Again</a>
+    </small>
+  </div>
+</div>
+
+{% endblock content %}

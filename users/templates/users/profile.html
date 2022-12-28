@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% comment %} 
+  can access templates in the blog app like this
+  csrf_token - a hidden tag, prevents cross site request forgerys, hence csrf_token
+  {% endcomment %}
+
+{% block content %}
+{% comment %} 
+  user is the current logged in user. It is global. It 
+  is not on the context
+{% endcomment %}
+  <h1>{{ user.username }}</h1>
+
+{% endblock content %}

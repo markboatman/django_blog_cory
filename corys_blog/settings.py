@@ -131,3 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # for our installed django-crispy-forms library
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# to override django default for LoginView class based view
+LOGIN_REDIRECT_URL='blog-home'
+# override django default user not logged in redirect
+LOGIN_URL = 'login'

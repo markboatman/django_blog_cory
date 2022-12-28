@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # from this module or app
 from .forms import UserRegistrationForm
 # messages.debug
@@ -18,12 +19,17 @@ def register(request):
       form.save()
       username = form.cleaned_data.get('username')
       # messages will be on the blog-home context
-      messages.success(request, f'Account created for {username}')
-      return redirect('blog-home')
+      messages.success(request, f'Your account has been created, please login.')
+      return redirect('users-login')
     
   else:
     form = UserRegistrationForm()
   # pass the form to the template, this passed dictionary is the context
   return render(request, 'users/register.html', {'form': form})
 
-
+# With this decorator, if the user is not logged in, they will be redirected to
+# to accounts/login. That is the default. Change this in settings.py
+# 
+@login_required 
+def profile(request):
+  return render(request, 'users/profile.html')
