@@ -39,6 +39,7 @@
               <a class="nav-item nav-link" href="{% url 'login'%}">Login</a>
               <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
             {% endif %}
+            <span class="nav-item">{{ user.username }} {{ user.id }}</span>
           </div>
         </div>
       </div>

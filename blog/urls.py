@@ -5,6 +5,7 @@ from .views import (
   PostCreateView,
   PostUpdateView,
   PostDeleteView,
+  UserPostListView,
   )
 
 from  . import views
@@ -12,6 +13,8 @@ from  . import views
 urlpatterns = [
   path('', PostListView.as_view(), name='blog-home'),
   path('home/', PostListView.as_view(), name='blog-home'),
+  path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
+
   # create url param for this route <pk> with a type of int, django class
   # views expect the url param to be <pk>
   path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import (
   ListView, 
   DetailView, 
@@ -6,6 +6,7 @@ from django.views.generic import (
   UpdateView,
   DeleteView
 )
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # from the models file in the current package?
@@ -15,6 +16,7 @@ def home(request):
   context = {
     'title': 'Home',
     'posts': Post.objects.all(),
+    'user': request.user,
   }
   # render() returns an HttpResponse or an exception
   return render(request, 'blog/home.html', context)
@@ -27,6 +29,26 @@ class PostListView(ListView):
   context_object_name = 'posts'
   # set to list/array of ordering criteria, '-' reverse of chronilogically
   ordering = ['-date_posted']
+  paginate_by = 5
+
+class UserPostListView(ListView):
+  # list will be based on this model/table data
+  model = Post
+  template_name = 'blog/user_posts.html' # default: <app>/<model>_<view_type>.html
+  # override default value for context_object_name = 'object_list'
+  context_object_name = 'posts'
+  # if we override get_queryset, ordering here is ignored
+  # ordering = ['-date_posted'] 
+  paginate_by = 5
+
+  # override inherited method so we do not get and forward all posts to the template
+  # I.E. filter the posts by author.username
+  def get_queryset(self):
+    # self.kwargs.get('username') returns the value at '?username=fred', i.e 'fred'
+    # if user not found go to a 404 page
+    user = get_object_or_404(User, username=self.kwargs.get('username'))
+    return Post.objects.filter(author=user).order_by('-date_posted')
+
 
 class PostDetailView(DetailView):
   # will use all defaults names for template and context_object_name
