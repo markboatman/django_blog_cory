@@ -16,10 +16,12 @@ class Profile(models.Model):
   
   def __str__(self):
     return f'{self.user.username} Profile'
-
-  def save(self):
+  # args are different than tutorial, have to give it extra args so the
+  # method signature is satisfied
+  # args - positional arguments, kwargs - keyword arguments
+  def save(self, *args, **kwargs): # args are different than tutorial
     # run parent save, this will save the profile pic to the filesystem
-    super().save()
+    super(Profile, self).save(*args, **kwargs)
     # resize the profile pic
     image = Image.open(self.image.path)
     if image.height > 300 or image.width > 300:

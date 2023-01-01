@@ -2,6 +2,8 @@
 runserver
 runtime.txt
 app-notes.md
+# Mac
+.DS_Store
 
 # This if from github/gitignore/Python.gitignore
 # Byte-compiled / optimized / DLL files

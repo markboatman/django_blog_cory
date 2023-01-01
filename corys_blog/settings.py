@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+# have to install dj-database-url
+import dj_database_url
 from pathlib import Path, os
 
 
@@ -20,17 +21,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+# generated secure key here: https://miniwebtool.com/django-secret-key-generator/
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-as)9c$x6odm+y7vm%up6j$2$uz-((&#$gj5s&2_*h)t#=*bufc'
+SECRET_KEY = os.environ.get(
+  # if DJANGO_SECRET_KEY is not set in the environment, use insecure
+  'DJANGO_SECRET_KEY', 'django-insecure-as)9c$x6odm+y7vm%up6j$2$uz-((&#$gj5s&2_*h)t#=*bufc'
+)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# if DJANGO_DEBUG not defined in os.environ, DEBUG will be True
+# Have to explicitly set DJANGO_DEBUG to False in .env/runserver
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+print('DEBUG is set to?: %s' % DEBUG)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+                 'django-local-library-mb.herokuapp.com']
 
+# These are 'python manage.py check --deploy' recmmendation
+# Note - setting these may cause problems in dev
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
-
 INSTALLED_APPS = [
     # this is our blog app
     'blog.apps.BlogConfig',
@@ -83,10 +94,26 @@ WSGI_APPLICATION = 'corys_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'corys_blog',
+        'USER': 'mark',
+        'PASSWORD': '*WoYaoLai*',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
+# postgres setup from mdn docs
+# Django will now use the database configuration in DATABASE_URL if
+# the environment variable is set; otherwise it uses the default
+# SQLite database. The value conn_max_age=500 makes the connection persistent,
+# which is far more efficient than recreating the connection on every request
+# cycle (this is optional and can be removed if needed).
+# Update database configuration from $DATABASE_URL if defined in env
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# print('db_from_env: %s' % db_from_env)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -113,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 
@@ -137,3 +164,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL='blog-home'
 # override django default user not logged in redirect
 LOGIN_URL = 'login'
+# configure django to use my gmail account to send mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST ='smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# Cory does not set this EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+

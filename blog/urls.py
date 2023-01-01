@@ -9,7 +9,7 @@ from .views import (
   )
 
 from  . import views
-
+# all these routes will be prefixed with blog/ in the browser
 urlpatterns = [
   path('', PostListView.as_view(), name='blog-home'),
   path('home/', PostListView.as_view(), name='blog-home'),

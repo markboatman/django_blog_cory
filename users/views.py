@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-# from this module or app
-from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
 # messages.debug
 # messages.success
 # messages.warning
 # messages.error
 # messages.info
+from django.contrib.auth.decorators import login_required
+# from this module or app
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
+
 
 def register(request):
   if request.method == 'POST':
