@@ -2,6 +2,9 @@
 runserver
 runtime.txt
 app-notes.md
+AWS-S3-file-system.md
+runserver_local_lib
+corys_blog/settings_local_lib.py
 # Mac
 .DS_Store
 
