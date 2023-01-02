@@ -33,8 +33,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 print('DEBUG is set to?: %s' % DEBUG)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 'django-local-library-mb.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # These are 'python manage.py check --deploy' recmmendation
 # Note - setting these may cause problems in dev
@@ -94,14 +93,15 @@ WSGI_APPLICATION = 'corys_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'corys_blog',
-        'USER': 'mark',
-        'PASSWORD': '*WoYaoLai*',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'corys_blog',
+        # 'USER': 'mark',
+        #  The is the postgres pass for user 'mark'
+        # 'PASSWORD': '*WoYaoLai*',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 # postgres setup from mdn docs
@@ -172,4 +172,3 @@ EMAIL_USE_TLS = True
 # Cory does not set this EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
-
