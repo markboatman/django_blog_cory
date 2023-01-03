@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 print('DEBUG is set to?: %s' % DEBUG)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django-blog-mb.herokuapp.com']
 
 # These are 'python manage.py check --deploy' recmmendation
 # Note - setting these may cause problems in dev
