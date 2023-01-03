@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 # have to install dj-database-url
-import dj_database_url
+# import dj_database_url, commented this out because of django_heroku
+import django_heroku
 from pathlib import Path, os
 
 
