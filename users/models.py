@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+# from PIL import Image
 # Profiles have 1 related user and users have 1 related profile
 # Can create and assign profiles in /admin tool after registration and migration
 # Have to register this Model in current_app/admin.py to see in admin/
@@ -16,21 +16,23 @@ class Profile(models.Model):
   
   def __str__(self):
     return f'{self.user.username} Profile'
-  # args are different than tutorial, have to give it extra args so the
-  # method signature is satisfied
+
+
+  # Can use an AWS Lamda funtion to replace this functionality on the AWS side
+  # This save() is from before we started using AWS buckets
   # args - positional arguments, kwargs - keyword arguments
-  def save(self, *args, **kwargs): # args are different than tutorial
-    # run parent save, this will save the profile pic to the filesystem
-    super(Profile, self).save(*args, **kwargs)
-    # resize the profile pic
-    image = Image.open(self.image.path)
-    if image.height > 300 or image.width > 300:
-      # create a tuple of max sizes
-      max_sizes = (300, 300)
-      # resize image in place
-      image.thumbnail(max_sizes)
-      # save/overwrite the old big image
-      image.save(self.image.path)
+  # def save(self, *args, **kwargs): 
+  #   # run parent save, this will save the profile pic to the filesystem
+  #   super(Profile, self).save(*args, **kwargs)
+  #   # resize the profile pic
+  #   image = Image.open(self.image.path)
+  #   if image.height > 300 or image.width > 300:
+  #     # create a tuple of max sizes
+  #     max_sizes = (300, 300)
+  #     # resize image in place
+  #     image.thumbnail(max_sizes)
+  #     # save/overwrite the old big image
+  #     image.save(self.image.path)
 
 
 

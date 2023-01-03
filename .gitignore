@@ -5,6 +5,8 @@ app-notes.md
 AWS-S3-file-system.md
 runserver_local_lib
 corys_blog/settings_local_lib.py
+AWS_new_user_credentials.csv
+CORS-config-cory.xml
 # Mac
 .DS_Store
 

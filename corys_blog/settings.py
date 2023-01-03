@@ -47,8 +47,11 @@ INSTALLED_APPS = [
     # this is our user app, 
     # UserConfig class is in users/apps.py
     'users.apps.UsersConfig',
+    # 3rd party apps
     # to access our installed django-crispy-forms
     'crispy_forms', # define this in this file, CRISPY_TEMPLATE_PACK = 'bootstrap4'
+    # for AWS bucket access
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -172,3 +175,12 @@ EMAIL_USE_TLS = True
 # Cory does not set this EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+# AWS stuff, from here https://django-storages.readthedocs.io/en/latest/
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+# don't allow users to overwrite files in the bucket that have the same name
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
