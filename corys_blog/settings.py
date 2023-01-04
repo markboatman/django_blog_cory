@@ -94,7 +94,9 @@ WSGI_APPLICATION = 'corys_blog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# DB will be sqlite locally, if run on heroku, because we are using
+# the package django-heroku, the database will be the addon database
+# on heroku.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
