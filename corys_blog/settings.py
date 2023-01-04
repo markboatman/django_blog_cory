@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get(
 
 # if DJANGO_DEBUG not defined in os.environ, DEBUG will be True
 # Have to explicitly set DJANGO_DEBUG to False in .env/runserver
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = os.environ.get('DEBUG', '') != 'False'
 print('DEBUG is set to?: %s' % DEBUG)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django-blog-mb.herokuapp.com']
