@@ -189,7 +189,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # call django_heroku to override some stuff based on where the app is running
 # I.E. heroku
-django_heroku.settings(local())
+django_heroku.settings(locals())
 
 
 
