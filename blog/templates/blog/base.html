@@ -27,19 +27,20 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{% url "blog-home" %}">Home</a>
-            <a class="nav-item nav-link" href="{% url "blog-about" %}">About</a>
+            <a class="nav-item nav-link" href="{% url "blog-about" %}">About This App</a>
           </div>
           <!-- Top Navbar Right Side -->
-          <div class="navbar-nav">
+          <div class="navbar-nav mt-2">
             {% if user.is_authenticated %}
               <a class="nav-item nav-link" href="{% url 'post-create'%}">Add Post</a>
               <a class="nav-item nav-link" href="{% url 'profile'%}">Profile</a>
               <a class="nav-item nav-link" href="{% url 'logout'%}">Logout</a>
+              <p class="nav-item ml-4 mt-2 text-white" href="#">Welcome: {{ user.username }}</p>
             {% else %}
               <a class="nav-item nav-link" href="{% url 'login'%}">Login</a>
               <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-            {% endif %}
-            <span class="nav-item">{{ user.username }} {{ user.id }}</span>
+              {% endif %}
+            {% comment %} <span class="nav-item">{{ user.username }} {{ user.id }}</span> {% endcomment %}
           </div>
         </div>
       </div>
@@ -48,7 +49,7 @@
 
 <main role="main" class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div > {# if you uncomment the sidebar, class="col-md-8"  #}
       {% if messages %}
         {% for message in messages %}
           {# messsage.tags will be a bootstap compatible string #}
@@ -59,7 +60,7 @@
       {% endif %}
       {% block content %}{% endblock %}
     </div>
-    <div class="col-md-4">
+    {% comment %} <div class="col-md-4">
       <div class="content-section">
         <h3>Our Sidebar</h3>
         <p class='text-muted'>You can put any information here you'd like.
@@ -71,7 +72,7 @@
           </ul>
         </p>
       </div>
-    </div>
+    </div> {% endcomment %}
   </div>
 </main>
 

@@ -1,5 +1,42 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
- <h1>About Page</h1>
+<article class="media content-section">
+  <div class="media-body">
+    <h1>Django Blog App</h1>
+    <p> This Django project is running on heroku and is using a postreSQL database for django data 
+      support as well as app specific data storage. App specific data includes user profiles and 
+      user blog posts. The project includes the main project app, a 'blog' app, and a 'user' app.</p>
+    <p> The project uses much of the valuable functionality Django provides.
+      Users are instances of 'auth.models.User'. Users have a reference to a 'user.profile' object.
+      Profile objects inherit from 'django.db.models.Model''. Users are created using a 
+      UserRegistrationForm that is a decendant of a Django UserCreationForm. User and Profile 
+      updates are handled by decendants of Django 'forms.ModelForm'.
+    </p>
+    <p>
+      User authentication and passsword recovery take advantage of the django.contrib.auth.views:
+      LoginView, LogoutView, PasswordResetView, etc.
+    </p>
+    <p>
+      Profile image files are stored in an AWS S3 bucket. This is made possible 
+      through the use of the django-storage and boto3 packages.
+      </p>
+    <p>
+      Much of the heroku deployment configuration requirments are handled
+      by the package django_heroku imported in the project's settings.py
+      file.
+    </p>
+    <p>
+      This project is based on the code presented in this 
+      <a href="https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p" target="_blank">
+        Django Tutorial Series
+      </a>
+    </p>
+    <p>
+      My heavily commented version of the code is here <a href="" target="_blank">Github</a>
+    </p>
+
+  </div>
+
+</article>
 {% endblock content %}
